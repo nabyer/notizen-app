@@ -1,15 +1,25 @@
 import Card from "react-bootstrap/Card";
 
-export default function NotesCard() {
+type Props = {
+  title: string,
+  content: string,
+  categories: string[]
+}
+
+export default function NotesCard(props: Props) {
+
+  const categories = props.categories.map(c => '#' + c).join(' ')
 
   return (
     <Card style={{ width: '18rem' }}>
       <Card.Body>
-        <Card.Title>Unsere Überschrift</Card.Title>
+        <Card.Title>{props.title}</Card.Title>
         <Card.Text>
-          Das ist unser Fließtext. Hier kommt der Inhalt unserer Notiz rein.
+          {props.content}
         </Card.Text>
-        <Card.Subtitle className="mb-2 text-muted">#Thema</Card.Subtitle>
+        <Card.Subtitle className="mb-2 text-muted">{
+          categories
+        }</Card.Subtitle>
       </Card.Body>
     </Card>
   )

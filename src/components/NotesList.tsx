@@ -1,6 +1,6 @@
 import NotesCard from "./Card";
 import { Note } from "../types/notes.type";
-import { Container } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 
 type Props = {
     notes: Note[]
@@ -12,13 +12,17 @@ function NotesList(props: Props){
     return (
         <>
             <Container>
-            {
-                props.notes.map(note => <NotesCard
-                id={note.id}
-                title={note.title}
-                categories={note.categories}
-                content={note.content} />)
-            }
+                <Row>
+                    <Col>
+                    {
+                        props.notes.map(note => <NotesCard
+                        id={note.id}
+                        title={note.title}
+                        categories={note.categories}
+                        content={note.content} />)
+                    }
+                    </Col>
+                </Row>
             </Container>
         </>
     )

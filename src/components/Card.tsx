@@ -1,9 +1,9 @@
 import Card from "react-bootstrap/Card";
+import { Note } from "../types/notes.type";
 
-type Props = {
-  title: string,
-  content: string,
-  categories: string[]
+
+type Props = Note & {
+
 }
 
 export default function NotesCard(props: Props) {

@@ -3,4 +3,6 @@ export type Note = {
     content: string,
     categories: string[],
     id: number
+    user: string;
+    date: Date;
 }

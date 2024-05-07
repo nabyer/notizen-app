@@ -15,7 +15,7 @@ function CreateNote(props: Props) {
     const categoriesRef = useRef<HTMLInputElement>(null);
     const userRef = useRef<HTMLInputElement>(null);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         const title = titleRef.current!.value;
         const content = contentRef.current!.value;
@@ -26,7 +26,8 @@ function CreateNote(props: Props) {
 
         const categories = categoriesInput.split(',').map(category => category.trim())
 
-        fetch(`${BASE_URL}/notes`, {
+        try {
+        const response = await fetch(`${BASE_URL}/notes`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -34,6 +35,11 @@ function CreateNote(props: Props) {
             },
             body: JSON.stringify({ title, content, user, categories })
         })
+        if (!response.ok) throw new Error('Die Notiz konnte nicht erstellt werden.')
+        } catch (error) {
+            console.error(error)
+            alert('Die Notiz konnte nicht erstellt werden.')
+        }
 
         window.location.reload()
 
